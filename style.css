@@ -1,0 +1,139 @@
+body {
+    background: linear-gradient(to bottom, #000000, #330000);
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.red {
+    color: red;
+}
+
+#mascot {
+    width: 150px;
+    height: auto;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+select {
+    margin: 10px;
+    padding: 5px;
+    font-size: 1em;
+}
+
+button {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+button:hover {
+    background: darkred;
+}
+
+button:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 10px red;
+}
+
+#timer {
+    font-size: 1.5em;
+    margin: 10px;
+}
+
+#mazeCanvas {
+    border: 1px solid red;
+    background: #111;
+    max-width: 90vw;
+    max-height: 50vh;
+}
+
+#controls {
+    display: grid;
+    grid-template-areas:
+        ". up ."
+        "left . right"
+        ". down .";
+    gap: 10px;
+    margin: 20px auto;
+    width: 200px;
+}
+
+#up { grid-area: up; }
+#left { grid-area: left; }
+#down { grid-area: down; }
+#right { grid-area: right; }
+
+#winModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #000;
+    border: 2px solid red;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px red;
+    text-align: center;
+    z-index: 10;
+}
+
+.cheers {
+    display: flex;
+    justify-content: center;
+}
+
+.cheer {
+    width: 50px;
+    height: auto;
+    margin: 10px;
+    animation: bounce 0.5s infinite alternate;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+footer {
+    position: fixed;
+    bottom: 10px;
+    font-size: 0.8em;
+}
+
+footer a {
+    color: red;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    #mazeCanvas {
+        max-height: 40vh;
+    }
+    #controls {
+        width: 150px;
+    }
+    button {
+        padding: 15px;
+        font-size: 1.5em;
+    }
+}
