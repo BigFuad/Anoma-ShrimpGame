@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Anoma Shrimp Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="landing" class="screen">
+    <div class="mascot-row">
+      <img src="mage.png" alt="mascot" id="mascot" onerror="this.style.display='none'">
+      <div class="welcome-text">
+        <div class="small">Welcome to the</div>
+        <div class="title"><span class="anoma-red">Anoma</span> Shrimp Game</div>
+      </div>
+    </div>
+
+    <div class="controls-panel">
+      <label for="level">Difficulty level</label>
+      <select id="level" aria-label="Difficulty level"></select>
+      <div class="desc">Choose 1 (easy) to 20 (hard)</div>
+      <button id="playBtn" class="btn btn-red">Play</button>
+      <div class="credit">built by <a id="xlink" href="https://x.com/sherlock_XIX" target="_blank" rel="noopener">@sherlock_XIX</a></div>
+    </div>
+  </main>
+
+  <section id="gameScreen" class="screen hidden">
+    <div id="topBar">
+      <div id="timer">Time: 00:00.000</div>
+      <div id="levelLabel">Level 1</div>
+      <div id="exitHint">Reach the glowing exit</div>
+    </div>
+
+    <div id="gameArea">
+      <canvas id="mazeCanvas" aria-label="Maze canvas"></canvas>
+
+      <div id="onScreenControls" aria-hidden="false">
+        <button class="arrow up" data-dir="up" aria-label="Up">▲</button>
+        <div class="midRow">
+          <button class="arrow left" data-dir="left" aria-label="Left">◀</button>
+          <button class="arrow down" data-dir="down" aria-label="Down">▼</button>
+          <button class="arrow right" data-dir="right" aria-label="Right">▶</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="bottomBar">
+      <button id="restartBtn" class="btn">Restart</button>
+      <button id="backBtn" class="btn">Back</button>
+    </div>
+
+    <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
+  </section>
+
+  <div id="winPopup" class="overlay hidden" role="dialog" aria-modal="true">
+    <div class="popupCard">
+      <div id="cheerline" class="cheerline">🧙‍♂️ 🧙‍♀️ 🧙</div>
+      <h2>Congratulations!</h2>
+      <p class="finalTime">You finished in <span id="finalTimeValue">00:00.000</span></p>
+      <div class="popupButtons">
+        <button id="playAgain" class="btn btn-red">Play Again</button>
+        <button id="closePopup" class="btn">Back to Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
