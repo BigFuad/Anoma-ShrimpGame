@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Anoma Shrimp</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Landing Page -->
+<div class="landing" id="landing">
+  <img src="assets/mage.png" alt="Shadow Mage Mascot" class="mascot-img" />
+  <h1>Welcome to the <span class="red-text">Anoma</span> Shrimp Game</h1>
+
+  <label for="difficulty" class="difficulty-label">Select Difficulty Level:</label>
+  <input type="number" id="difficulty" name="difficulty" min="1" max="20" value="1"/>
+  
+  <button class="red-btn" id="play-btn">Play</button>
+</div>
+
+<!-- Game Page -->
+<div class="game hidden" id="game">
+  <div id="timer">Time: 0.00 s</div>
+  <div id="maze-container">
+    <canvas id="maze-canvas"></canvas>
+  </div>
+
+  <div id="controls">
+    <button id="up" aria-label="Move Up">↑</button>
+    <button id="left" aria-label="Move Left">←</button>
+    <button id="down" aria-label="Move Down">↓</button>
+    <button id="right" aria-label="Move Right">→</button>
+  </div>
+
+  <button id="mute-btn" aria-pressed="false">Mute</button>
+</div>
+
+<!-- Win Popup -->
+<div class="popup hidden" id="win-popup" role="dialog" aria-modal="true" aria-labelledby="win-message">
+  <div id="win-message">🎉 Congratulations! You escaped the maze! 🎉</div>
+  <img src="assets/cheering-mage.png" alt="Cheering Mage Mascot" class="mascot-img" />
+  <button id="restart-btn">Play Again</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
