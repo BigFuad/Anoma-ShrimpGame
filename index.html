@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anoma Shrimp Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="landing">
+        <img id="mascot" src="mage.png" alt="Shadow Mage">
+        <h1>Welcome to the <span class="red">Anoma</span> Shrimp Game</h1>
+        <label for="difficulty">Select Difficulty (1-20):</label>
+        <select id="difficulty">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+        </select>
+        <button id="play">Play</button>
+    </div>
+
+    <div id="game" class="hidden">
+        <div id="timer">Time: 0s</div>
+        <canvas id="mazeCanvas"></canvas>
+        <div id="controls">
+            <button id="up">↑</button>
+            <button id="left">←</button>
+            <button id="down">↓</button>
+            <button id="right">→</button>
+        </div>
+    </div>
+
+    <div id="winModal" class="hidden">
+        <h2>Congratulations!</h2>
+        <p id="winTime">Time taken: 0 seconds</p>
+        <div class="cheers">
+            <img src="mage.png" class="cheer" alt="Cheering Mage">
+            <img src="mage.png" class="cheer" alt="Cheering Mage">
+            <img src="mage.png" class="cheer" alt="Cheering Mage">
+        </div>
+        <button id="playAgain">Play Again</button>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="background_music.mp3" type="audio/mpeg">
+    </audio>
+
+    <footer>
+        <a href="https://x.com/sherlock_XIX">built by @sherlock_XIX</a>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
