@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shrimp Maze</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body class="game">
+  <div class="game-container">
+    <h2 id="timer">Time: 0s</h2>
+    <canvas id="mazeCanvas" width="600" height="400"></canvas>
+
+    <!-- On-screen Arrow Keys -->
+    <div class="dpad">
+      <button onclick="move('up')">⬆</button>
+      <div>
+        <button onclick="move('left')">⬅</button>
+        <button onclick="move('down')">⬇</button>
+        <button onclick="move('right')">➡</button>
+      </div>
+    </div>
+
+    <audio id="bgMusic" loop autoplay>
+      <source src="music.mp3" type="audio/mpeg">
+    </audio>
+    <button onclick="toggleMusic()" class="mute-btn">Mute/Unmute</button>
+
+    <footer>
+      Built by <a href="https://twitter.com/sherlock_XIX" target="_blank">@sherlock_XIX</a>
+    </footer>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
