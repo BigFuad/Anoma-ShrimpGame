@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shrimp Maze Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="landing">
+  <div class="landing-container">
+    <img src="mage.png" alt="Mage" class="mage-image">
+
+    <h1 class="moving-text">Welcome to <span class="anoma">Anoma</span></h1>
+    <p class="sub-text">Okay</p>
+
+    <div class="levels">
+      <h2>Levels</h2>
+      <ul>
+        <script>
+          for (let i = 1; i <= 20; i++) {
+            document.write(`<li><a href="game.html?level=${i}">Level ${i}</a></li>`);
+          }
+        </script>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
