@@ -1,0 +1,59 @@
+.game-container {
+    width: 400px;
+    height: 400px;
+    border: 1px solid black;
+    margin: 40px auto;
+    position: relative;
+}
+
+#maze-canvas {
+    border: 1px solid black;
+}
+
+.controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.arrow-button {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    margin: 10px;
+    border: none;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+}
+
+.difficulty-selector {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.winning-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    display: none;
+}
+
+#time-taken {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+#shrimp {
+    z-index: 1;
+}
