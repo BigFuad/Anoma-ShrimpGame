@@ -1,0 +1,78 @@
+/* Anoma Shrimp Game Styles */
+*{box-sizing:border-box}
+:root{
+  --bg:#0a0b12;
+  --bg2:#0e0f1a;
+  --text:#eef2ff;
+  --muted:#a9b6df;
+  --red:#e11937;
+  --red-d:#bf0f2a;
+  --line:#ff3040;
+  --line-glow:rgba(255,48,64,.35);
+}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:'Outfit',system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  background: radial-gradient(120% 140% at 50% -20%, #151627, var(--bg));
+  display:flex; flex-direction:column;
+}
+
+/* Screens */
+.screen{padding:20px; width:100%; max-width:1000px; margin:0 auto}
+.landing{display:grid; place-items:center; gap:16px; text-align:center; min-height:70vh}
+.mage-hero{position:relative; width:min(70vw,480px); height:auto; filter:drop-shadow(0 10px 30px rgba(255,0,20,.06));}
+.mage-svg{width:100%; height:auto; opacity:.9}
+.headline{font-weight:800; letter-spacing:.4px; margin:0}
+.brand{color:var(--red); text-shadow:0 0 10px rgba(225,25,55,.35);}
+.start-panel{display:flex; flex-direction:column; gap:12px; align-items:center}
+.level-label{display:flex; gap:10px; align-items:center; font-weight:600}
+select{
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.15);
+  color:var(--text); padding:8px 12px; border-radius:12px;
+}
+.btn{padding:10px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  color:var(--text); cursor:pointer; transition:.15s transform,.2s background,.2s box-shadow}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn.small{padding:6px 10px; font-size:.9rem}
+.btn-red{background:linear-gradient(180deg,var(--red),var(--red-d)); border-color:transparent; color:white;
+  box-shadow:0 0 0 0 rgba(225,25,55,.6)}
+.btn-red:hover{box-shadow:0 0 22px 2px rgba(225,25,55,.25)}
+.secondary{opacity:.9}
+.hint{color:var(--muted)}
+
+/* HUD */
+.hud{display:grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap:10px; align-items:center;
+  background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:8px 10px; margin-bottom:10px}
+.hud>div{text-align:center}
+.stage-wrap{display:grid; place-items:center}
+#maze{max-width:90vw; height:auto; background:linear-gradient(180deg,var(--bg2),#0c0d19);
+  border-radius:14px; outline:1px solid rgba(255,255,255,.08); touch-action:none}
+
+/* Controls D-pad */
+.controls{display:grid; place-items:center; margin-top:10px}
+.dpad{display:grid; grid-template-rows:auto auto auto; gap:8px; user-select:none}
+.dpad .row{display:grid; grid-template-columns:auto auto; gap:8px}
+.arrow{width:84px; height:56px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06); color:#fff; font-size:20px; transition:transform .06s, box-shadow .2s}
+.arrow:active{transform:scale(.98); box-shadow:0 0 18px 2px rgba(225,25,55,.25)}
+@media (min-width:820px){ .controls{display:none} }
+
+/* Win Modal */
+.win-modal{border:1px solid rgba(255,255,255,.12); background:var(--bg2); color:var(--text);
+  border-radius:16px; padding:18px; max-width:560px}
+.win-modal::backdrop{background:rgba(0,0,0,.5)}
+.cheer-mages{display:flex; justify-content:center; gap:16px; margin-bottom:6px}
+.mage{width:70px; height:70px; background:radial-gradient(40px 40px at 50% 35%, rgba(255,50,70,.25), rgba(0,0,0,0) 60%), #0b0b12;
+  border-radius:50%; position:relative; box-shadow:0 0 20px var(--line-glow); animation:bob 1.8s ease-in-out infinite}
+.mage.small{width:54px; height:54px; animation-duration:1.6s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+.foot{ text-align:center; color:var(--muted); padding:16px}
+
+/* Visual details for maze */
+.glow{filter: drop-shadow(0 0 6px var(--line-glow));}
