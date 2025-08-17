@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anoma Shrimp Game</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Landing Page */
+    #landing {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: black;
+      position: relative;
+    }
+
+    #landing h1 {
+      font-size: 2em;
+      color: white;
+      position: relative;
+      animation: moveText 5s linear infinite alternate;
+    }
+
+    #landing h1 span {
+      color: red;
+    }
+
+    @keyframes moveText {
+      0% { transform: translateX(-40%); }
+      100% { transform: translateX(40%); }
+    }
+
+    #landing img {
+      max-width: 200px;
+      margin: 20px;
+    }
+
+    #playBtn {
+      background: red;
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 15px;
+    }
+
+    #playBtn:hover {
+      background: darkred;
+    }
+
+    #difficulty {
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: 1px solid red;
+      background: black;
+      color: white;
+    }
+
+    /* Game Area */
+    #game {
+      display: none;
+      height: 100vh;
+      width: 100vw;
+      background: black;
+      position: relative;
+    }
+
+    #mazeCanvas {
+      display: block;
+      margin: auto;
+      background: black;
+    }
+
+    #timer {
+      color: white;
+      font-size: 1.2em;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* Controls */
+    #controls {
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: grid;
+      grid-template-columns: 80px 80px 80px;
+      grid-template-rows: 80px 80px;
+      gap: 10px;
+      justify-items: center;
+      align-items: center;
+    }
+
+    .ctrl-btn {
+      background: #222;
+      border: 2px solid red;
+      color: white;
+      font-size: 2em;
+      width: 80px;
+      height: 80px;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 0 10px red;
+      transition: 0.2s;
+    }
+
+    .ctrl-btn:active {
+      transform: scale(0.9);
+      box-shadow: 0 0 20px red;
+    }
+
+    #up { grid-column: 2; grid-row: 1; }
+    #left { grid-column: 1; grid-row: 2; }
+    #down { grid-column: 2; grid-row: 2; }
+    #right { grid-column: 3; grid-row: 2; }
+
+    /* Win Popup */
+    #winPopup {
+      display: none;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      color: white;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-size: 1.5em;
+      z-index: 10;
+    }
+
+    #winPopup img {
+      max-width: 150px;
+      margin: 20px;
+    }
+
+    #finalTime {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+    /* Footer */
+    #footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9em;
+      color: white;
+    }
+
+    #footer a {
+      color: red;
+      text-decoration: none;
+    }
+
+    #footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Landing Page -->
+  <div id="landing">
+    <h1>Welcome to the <span>Anoma</span> Shrimp Game</h1>
+    <img src="mage.png" alt="Mascot">
+
+    <label for="difficulty">Choose Difficulty:</label>
+    <select id="difficulty">
+      <script>
+        for(let i=1; i<=20; i++){
+          document.write(`<option value="${i}">Level ${i}</option>`);
+        }
+      </script>
+    </select>
+
+    <button id="playBtn">Play</button>
+
+    <!-- Footer also on Landing -->
+    <div id="footer">
+      Built by <a href="https://twitter.com/sherlock_XIX" target="_blank">@sherlock_XIX</a>
+    </div>
+  </div>
+
+  <!-- Game Page -->
+  <div id="game">
+    <div id="timer">Time: 0s</div>
+    <canvas id="mazeCanvas"></canvas>
+    <div id="controls">
+      <button class="ctrl-btn" id="up">↑</button>
+      <button class="ctrl-btn" id="left">←</button>
+      <button class="ctrl-btn" id="down">↓</button>
+      <button class="ctrl-btn" id="right">→</button>
+    </div>
+
+    <div id="winPopup">
+      <img src="mage.png" alt="Mage cheering">
+      <div>🎉 Congratulations! You Escaped! 🎉</div>
+      <div id="finalTime"></div>
+    </div>
+
+    <!-- Footer also on Game -->
+    <div id="footer">
+      Built by <a href="https://twitter.com/sherlock_XIX" target="_blank">@sherlock_XIX</a>
+    </div>
+  </div>
+
+  <audio id="bgMusic" src="music.mp3" loop></audio>
+
+  <script>
+    const playBtn = document.getElementById("playBtn");
+    const landing = document.getElementById("landing");
+    const game = document.getElementById("game");
+    const canvas = document.getElementById("mazeCanvas");
+    const ctx = canvas.getContext("2d");
+    const timerEl = document.getElementById("timer");
+    const winPopup = document.getElementById("winPopup");
+    const finalTimeEl = document.getElementById("finalTime");
+    const music = document.getElementById("bgMusic");
+    const difficulty = document.getElementById("difficulty");
+
+    let cellSize, maze, rows, cols;
+    let shrimp = { x: 0, y: 0 };
+    let goal = { x: 0, y: 0 };
+    let timer = 0;
+    let interval;
+
+    // Start Game
+    playBtn.onclick = () => {
+      landing.style.display = "none";
+      game.style.display = "block";
+      music.play();
+
+      const level = parseInt(difficulty.value);
+      const size = 5 + level; // Maze grows with difficulty
+      startGame(size, size);
+    };
+
+    function startGame(r,c){
+      rows = r; cols = c;
+      canvas.width = window.innerWidth * 0.9;
+      canvas.height = window.innerHeight * 0.7;
+      cellSize = Math.min(canvas.width/cols, canvas.height/rows);
+      maze = generateMaze(rows, cols);
+      shrimp = {x:0, y:0};
+      goal = {x:cols-1, y:rows-1};
+      timer = 0;
+      clearInterval(interval);
+      interval = setInterval(()=>{
+        timer++;
+        timerEl.textContent = `Time: ${timer}s`;
+      },1000);
+      drawMaze();
+    }
+
+    function generateMaze(r,c){
+      let grid = Array.from({length:r}, ()=>Array(c).fill(0));
+      for(let i=0;i<r;i++){
+        for(let j=0;j<c;j++){
+          if(Math.random()<0.25 && !(i==0&&j==0) && !(i==r-1&&j==c-1)){
+            grid[i][j]=1;
+          }
+        }
+      }
+      return grid;
+    }
+
+    function drawMaze(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let i=0;i<rows;i++){
+        for(let j=0;j<cols;j++){
+          if(maze[i][j]===1){
+            ctx.strokeStyle="red";
+            ctx.lineWidth=2;
+            ctx.strokeRect(j*cellSize, i*cellSize, cellSize, cellSize);
+          }
+        }
+      }
+      // Shrimp
+      ctx.fillStyle="yellow";
+      ctx.shadowColor="red";
+      ctx.shadowBlur=15;
+      ctx.beginPath();
+      ctx.arc(shrimp.x*cellSize+cellSize/2, shrimp.y*cellSize+cellSize/2, cellSize/3, 0, Math.PI*2);
+      ctx.fill();
+      ctx.shadowBlur=0;
+
+      // Goal
+      ctx.fillStyle="lime";
+      ctx.fillRect(goal.x*cellSize+cellSize/4, goal.y*cellSize+cellSize/4, cellSize/2, cellSize/2);
+    }
+
+    function move(dx,dy){
+      let nx = shrimp.x+dx, ny = shrimp.y+dy;
+      if(nx>=0 && ny>=0 && nx<cols && ny<rows && maze[ny][nx]===0){
+        shrimp.x=nx; shrimp.y=ny;
+      }
+      drawMaze();
+      checkWin();
+    }
+
+    function checkWin(){
+      if(shrimp.x===goal.x && shrimp.y===goal.y){
+        clearInterval(interval);
+        finalTimeEl.textContent = `Time Taken: ${timer}s`;
+        winPopup.style.display="flex";
+      }
+    }
+
+    // Controls
+    document.getElementById("up").onclick = ()=>move(0,-1);
+    document.getElementById("down").onclick = ()=>move(0,1);
+    document.getElementById("left").onclick = ()=>move(-1,0);
+    document.getElementById("right").onclick = ()=>move(1,0);
+
+    window.addEventListener("keydown",(e)=>{
+      if(e.key==="ArrowUp"||e.key==="w") move(0,-1);
+      if(e.key==="ArrowDown"||e.key==="s") move(0,1);
+      if(e.key==="ArrowLeft"||e.key==="a") move(-1,0);
+      if(e.key==="ArrowRight"||e.key==="d") move(1,0);
+    });
+  </script>
+</body>
+</html>
