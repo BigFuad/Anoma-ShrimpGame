@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: black;
+  color: white;
+  text-align: center;
+}
+
+.hidden { display: none; }
+
+.red { color: red; }
+
+#landing {
+  margin-top: 50px;
+}
+
+#landing h1 {
+  animation: scrollText 6s linear infinite;
+}
+
+@keyframes scrollText {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+#playBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 20px;
+  background: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#playBtn:hover { background: darkred; }
+
+#gameCanvas {
+  display: block;
+  margin: 20px auto;
+  background: black;
+  border: 1px solid red;
+}
+
+#controls {
+  margin-top: 20px;
+}
+.ctrl {
+  width: 60px;
+  height: 60px;
+  font-size: 30px;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+#winPopup {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #111;
+  padding: 20px;
+  border: 2px solid red;
+  color: white;
+}
+
+#credit {
+  margin-top: 20px;
+}
+#credit a {
+  color: red;
+  text-decoration: none;
+}
+#credit a:hover { text-decoration: underline; }
