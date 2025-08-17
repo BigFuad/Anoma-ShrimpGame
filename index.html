@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anoma Shrimp Maze Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <canvas id="maze-canvas" width="400" height="400"></canvas>
+        <img id="shrimp" src="shrim.png" alt="Shrimp" style="position: absolute; top: 0; left: 0; width: 40px; height: 40px;">
+        <div class="controls">
+            <button class="arrow-button up">&#8593;</button>
+            <button class="arrow-button down">&#8595;</button>
+            <button class="arrow-button left">&#8592;</button>
+            <button class="arrow-button right">&#8594;</button>
+        </div>
+        <div class="difficulty-selector">
+            <label for="difficulty-level">Select Difficulty Level:</label>
+            <select id="difficulty-level" name="difficulty-level">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <!-- Add more options for levels 4-20 -->
+            </select>
+        </div>
+        <div class="winning-popup" id="winning-popup">
+            <p>Congratulations! You won in <span id="time-taken"></span> seconds.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
